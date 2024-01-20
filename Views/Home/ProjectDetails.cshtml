@@ -1,0 +1,66 @@
+@{
+    ViewData["Title"] = "Project Deatils";
+}
+
+@await Html.PartialAsync("Partials/_Navbar")
+
+@model Support
+<div class="text-center">
+    <h2>@ViewBag.projects.Title!</h2>
+    <p class="mt-3">@ViewBag.projects.Description</p>
+</div>
+
+<div class="row justify-content-around mt-4">
+
+
+    <div class="col-4">
+        <div>
+            <h3>US$ @ViewBag.totalFunded</h3>
+            <p class="mt-3">Pledged of US$ @ViewBag.projects.Goal Goal!</p>
+        </div>
+        <div class="mt-4">
+            <h3>@ViewBag.numberOfSupporters</h3>
+            <p class="mt-3">Supporters</p>
+        </div>
+        <div class="mt-4">
+            <h3>@ViewBag.projects.EndDate?.ToString("MMMMMMMM dd")</h3>
+            @if(ViewBag.projects.EndDate < DateTime.Now)
+            {
+                <p></p>
+            }else{
+
+                <p class="mt-3 color-purple">@ViewBag.daysRemaining days left</p>
+            }
+        </div>
+    </div>
+
+
+    <div class="col-5">
+        @{
+
+            @if(ViewBag.projects.EndDate > DateTime.Now)
+            {
+                @if (ViewBag.userId == ViewBag.projects.UserId)
+                {
+                    <h3>You can not support your own project.</h3>
+                }else if(ViewBag.hasSupported){
+                    <h3>Thanks for your contribution</h3>
+                }else{
+                    <form  asp-action="SupportProject" asp-route-itemid="@ViewBag.projects.ProjectId" method="post">
+                        <h3>Support this Project</h3>
+
+                        <div class="form-group mt-3">
+                            <input asp-for="SupportAmount" class="form-control w-70 border-weight" id="LoginEmail">
+                            <span asp-validation-for="SupportAmount" class="text-danger"></span>
+                        </div>
+
+                        <input type="submit" class="mt-4 btn-shadow" value="Support!">
+                    </form>
+
+                }
+            }else{
+                <h3 class="text-danger text-center">Compaing closed</h3>
+            }
+        }
+    </div>
+</div>

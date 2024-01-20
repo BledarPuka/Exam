@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Project Form";
+}
+
+@model Project
+
+@await Html.PartialAsync("Partials/_Navbar")
+
+<form class="row m-4" asp-action="CreateProject" method="post">
+    <div class="col-6">
+        <h1 class="mb-4">Start a Project</h1>
+
+        <div>
+            <div class="form-group d-flex align-items-center justify-content-between">
+                <label asp-for="Title" class="bold-text" >Title:</label>
+                <input asp-for="Title" class="form-control w-70 border-weight" id="Title">
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </span>
+        </div>
+
+        <div class=" mt-4">
+            <div class="form-group d-flex align-items-center justify-content-between">
+                <label asp-for="Goal" class="bold-text">Goal(in USD):</label>
+                <input asp-for="Goal" class="form-control w-70 border-weight" id="Goal">
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="Goal" class="text-danger"></span>
+            </span>
+        </div>
+        <div class=" mt-4">
+            <div class="form-group d-flex align-items-center justify-content-between">
+                <label asp-for="EndDate" class="bold-text">End Date:</label>
+                <input asp-for="EndDate" class="form-control w-70 border-weight" id="EndDate">
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </span>
+        </div>
+        <div class=" mt-4">
+            <div class="form-group d-flex  justify-content-between">
+                <label asp-for="Description" class="bold-text">Description:</label>
+                <textarea asp-for="Description" class="form-control w-70 border-weight" id="Description" rows="3"></textarea>
+            </div>
+            <span class="d-flex justify-content-end">
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </span>
+        </div>
+
+        @* Botton Login *@
+        <span class="d-flex justify-content-end">
+            <input type="submit" class="mt-4 btn-shadow" value="Get Started">
+        </span>
+    </div>
+</form>
